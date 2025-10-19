@@ -41,23 +41,25 @@ if st.button("Run Tool"):
     payload = {
         "id": str(uuid.uuid4()),
         "jsonrpc": "2.0",
-        "tool": tool_name,
+        # "tool": tool_name,
         "method": tool_name,
         "session_id": st.session_state.session_id,
-        "input": {
+        "params": {
             "query": "python",
             "max_results": 3
         }
     }
 
-    if query:
-        payload["input"]["query"] = query
-    if max_results:
-        payload["input"]["max_results"] = max_results
+    # if query:
+    #     payload["input"]["query"] = query
+    # if max_results:
+    #     payload["input"]["max_results"] = max_results
 
     headers = {
+        "Content-Type": "application/json",
         "Accept": "application/json, text/event-stream",
-        "Session-ID": st.session_state.session_id
+        # "X-Session-ID": st.session_state.session_id
+        "x-session-id": st.session_state.session_id
     }
 
     try:
@@ -68,6 +70,9 @@ if st.button("Run Tool"):
 
         response.raise_for_status()
         result = response.json()
+
+        session_id = response.headers.get('x-session-id')
+        print(f"Session ID: {session_id}")
 
         st.subheader("🔍 Results")
         if isinstance(result, list):
@@ -88,4 +93,4 @@ if st.button("Run Tool"):
 # streamlit run chatbot_feed.py -- --debug --mcp_url http://localhost:24242/mcp --default_tool fcc_news_search
 
 # TODO
-# {"jsonrpc":"2.0","id":"server-error","error":{"code":-32600,"message":"Bad Request: Missing session ID"}}
+# data: {"jsonrpc":"2.0","id":"cf60c73e-c7a7-4abe-afd4-3d9bd6194fd7","error":{"code":-32602,"message":"Invalid request parameters","data":""}}

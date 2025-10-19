@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 # Attach the middleware when you create your FastMCP instance.
-mcp = FastMCP(name="FreeCodeCamp Feed Searcher")
+mcp = FastMCP(name="🚀🚀🚀FreeCodeCamp Feed Searcher", stateless_http=True, log_level="DEBUG")
 
 @mcp.tool()
 def fcc_news_search(query:str, max_results:int=3):
@@ -44,11 +44,29 @@ def fcc_secret_message():
     """Returns a secret message of FreeCodeCamp"""
     return "Keep exploring! and happy coding!"
 
+@mcp.tool
+def add(a: int, b: int) -> int:
+    """Add two numbers"""
+    return a + b
+
+@mcp.tool
+def hello(ctx: Context = None):
+    """Say hello"""
+    if ctx:
+        ctx.info("in Hello!")
+    return {"Response": "Hello!"}  #typo
+
+# Static resource
+@mcp.resource("config://version")
+def get_version(ctx: Context):
+    ctx.info("My test in get_version!")
+    return "2.0.1"
+
 if __name__ == "__main__":
     mcp.run(
-        transport="http",           # or "websocket"
+        # transport="http",           # or "websocket"
+        transport="streamable-http",
         host="localhost",             # default is "127.0.0.1"
         port=24242,                  # default port
         path="/mcp",
-        log_level="debug",           # options: "debug", "info", "warning", "error"
     )
