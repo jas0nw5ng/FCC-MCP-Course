@@ -1,6 +1,12 @@
-from fastmcp import FastMCP
+from fastmcp import FastMCP, Context
 import feedparser
 
+import logging
+logger = logging.getLogger(__name__)
+
+
+
+# Attach the middleware when you create your FastMCP instance.
 mcp = FastMCP(name="FreeCodeCamp Feed Searcher")
 
 @mcp.tool()
@@ -39,4 +45,10 @@ def fcc_secret_message():
     return "Keep exploring! and happy coding!"
 
 if __name__ == "__main__":
-    mcp.run(transport="http") 
+    mcp.run(
+        transport="http",           # or "websocket"
+        host="localhost",             # default is "127.0.0.1"
+        port=24242,                  # default port
+        path="/mcp",
+        log_level="debug",           # options: "debug", "info", "warning", "error"
+    )

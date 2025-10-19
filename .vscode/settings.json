@@ -1,0 +1,24 @@
+{
+    "editor.tabSize": 2, // tab必须是两格，漂亮 省地方
+    // "vim.disableAnnoyingNeovimMessage": true,
+    "workbench.sideBar.location": "left", //本人是双屏，vs code在右边，所以把sidebar放在最右边更舒服   
+    //接下来改改颜色了
+    "workbench.colorCustomizations": {
+        "editor.background": "#0a0a0a", //背景黑一点 对比明显 代码看得清楚
+        "activityBar.foreground": "#ff0303",//侧边图标变红
+        "sideBar.background": "#000000", 
+        "activityBar.background": "#000000",
+        "contrastActiveBorder": "#ff0000", //选文件的时候加个红边框 选的更准
+        "scrollbarSlider.background": "#7a2d2d", //滚动条更明显
+        "scrollbarSlider.hoverBackground": "#a00f0f",
+        "scrollbarSlider.activeBackground": "#ff0000",
+        "scrollbar.shadow": "#ff0000",
+        "statusBar.background": "#5c0000" //下边栏增强对比
+    },
+    // python format
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    // python language server engine
+    "python.languageServer": "Pylance",
+}

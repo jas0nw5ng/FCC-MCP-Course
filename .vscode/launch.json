@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mcp",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "chatbot",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\venv\\Scripts\\streamlit.exe",
+            "cwd": "${workspaceFolder}\\MainCode\\deployment",
+            "console": "integratedTerminal",
+            "args": [
+                "run",
+                "chatbot_feed.py",
+                "--", 
+                "--debug", 
+                "--mcp_url", 
+                "http://localhost:24242/mcp", 
+                "--default_tool", 
+                "fcc_news_search"
+            ]
+        }
+    ]
+}
